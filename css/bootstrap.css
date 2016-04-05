@@ -3548,7 +3548,7 @@ a.thumbnail:hover {
   background-image: linear-gradient(-45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
 }
 .hero-unit {
-  padding-bottom: 120px;
+  padding-bottom: 140px;
   margin-bottom: 30px;
   background-color: #eeeeee;
   -webkit-border-radius: 6px;
