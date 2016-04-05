@@ -122,7 +122,8 @@ section .step {
     -moz-border-radius: 6px;
     border-radius: 6px;
     /* padding: 30px; */
-    padding-top: 160px;
+    padding-top: 140px;
+    padding-left: 30px;
     width: 1000px;
     margin-left: -55px;
     /* box-shadow: -2px -2px 30px rgba(38,38,38,0.5); */
