@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
   <meta name="author" content="Trevor Perrin (noise@trevp.net)" />
-  <meta name="date" content="2016-04-04" />
+  <meta name="date" content="2016-04-06" />
   <title>The Noise Protocol Framework</title>
   <style type="text/css">code{white-space: pre;}</style>
   <link rel="stylesheet" href="spec_markdown.css" type="text/css" />
@@ -14,8 +14,8 @@
 <div id="header">
 <h1 class="title">The Noise Protocol Framework</h1>
 <b>Author:</b> Trevor Perrin (noise@trevp.net)<br/>
-<b>Revision:</b> 26<br/>
-<b>Date:</b> 2016-04-04<br/>
+<b>Revision:</b> 27<br/>
+<b>Date:</b> 2016-04-06<br/>
 </div>
 <div id="TOC">
 <h2 class="toc">Table of Contents</h2>
@@ -188,7 +188,7 @@
 </ul>
 <p>A <code>SymmetricState</code> responds to the following methods:</p>
 <ul>
-<li><strong><code>InitializeSymmetric(protocol_name)</code></strong>: Takes an arbitrary-length <code>protocol_name</code> byte sequence (see <a href="#protocol-names">Section 11</a>). Executes the following steps:
+<li><p><strong><code>InitializeSymmetric(protocol_name)</code></strong>: Takes an arbitrary-length <code>protocol_name</code> byte sequence (see <a href="#protocol-names">Section 11</a>). Executes the following steps:</p>
 <ul>
 <li><p>If <code>protocol_name</code> is less than or equal to <code>HASHLEN</code> bytes in length, sets <code>h</code> equal to <code>protocol_name</code> with zero bytes appended to make <code>HASHLEN</code> bytes. Otherwise sets <code>h = HASH(protocol_name)</code>.</p></li>
 <li><p>Sets <code>ck = h</code>.</p></li>
@@ -233,19 +233,23 @@
 </ul></li>
 <li><p><strong><code>WriteMessage(payload, message_buffer)</code></strong>: Takes a <code>payload</code> byte sequence which may be zero-length, and a <code>message_buffer</code> to write the output into.</p>
 <ul>
-<li><p>Fetches the next message pattern from <code>message_patterns[message_index]</code>, increments <code>message_index</code>, and sequentially processes each token from the message pattern:</p></li>
+<li><p>Fetches the next message pattern from <code>message_patterns[message_index]</code>, increments <code>message_index</code>, and sequentially processes each token from the message pattern:</p>
+<ul>
 <li><p>For <code>&quot;e&quot;</code>: Sets <code>e = GENERATE_KEYPAIR()</code>, overwriting any previous value for <code>e</code>. Appends <code>e.public_key</code> to the buffer. Calls <code>MixHash(e.public_key)</code>.</p></li>
 <li><p>For <code>&quot;s&quot;</code>: Appends <code>EncryptAndHash(s.public_key)</code> to the buffer.</p></li>
 <li><p>For <code>&quot;dhxy&quot;</code>: Calls <code>MixKey(DH(x, ry))</code>.</p></li>
+</ul></li>
 <li><p>Appends <code>EncryptAndHash(payload)</code> to the buffer.</p></li>
 <li><p>If there are no more message patterns returns two new <code>CipherState</code> objects by calling <code>Split()</code>.</p></li>
 </ul></li>
 <li><p><strong><code>ReadMessage(message, payload_buffer)</code></strong>: Takes a byte sequence containing a Noise handshake message, and a <code>payload_buffer</code> to write the message's plaintext payload into.</p>
 <ul>
-<li><p>Fetches the message pattern from <code>message_patterns[message_index]</code>, increments <code>message_index</code>, and sequentially processes each token from the message pattern:</p></li>
+<li><p>Fetches the message pattern from <code>message_patterns[message_index]</code>, increments <code>message_index</code>, and sequentially processes each token from the message pattern:</p>
+<ul>
 <li><p>For <code>&quot;e&quot;</code>: Sets <code>re</code> to the next <code>DHLEN</code> bytes from the message. Calls <code>MixHash(re.public_key)</code>.</p></li>
 <li><p>For <code>&quot;s&quot;</code>: Sets <code>temp</code> to the next <code>DHLEN + 16</code> bytes of the message if <code>HasKey() == True</code>, or to the next <code>DHLEN</code> bytes otherwise. Sets <code>rs</code> to <code>DecryptAndHash(temp)</code>.</p></li>
 <li><p>For <code>&quot;dhxy&quot;</code>: Calls <code>MixKey(DH(y, rx))</code>.</p></li>
+</ul></li>
 <li><p>Calls <code>DecryptAndHash()</code> on the remaining bytes of the message and stores the output into <code>payload_buffer</code>.</p></li>
 <li><p>If there are no more message patterns returns two new <code>CipherState</code> objects by calling <code>Split()</code>.</p></li>
 </ul></li>
@@ -262,7 +266,8 @@
 <li><p><code>WriteMessage()</code> and <code>ReadMessage()</code> are modified when processing the <code>&quot;e&quot;</code> token to call <code>MixKey(e.public_key)</code> as the final step. Because the initial messages in a handshake pattern are required to start with <code>&quot;e&quot;</code> (<a href="#pattern-validity">Section 8.1</a>), this ensures <code>k</code> is initialized from the pre-shared key. This also uses the ephemeral public key's value as a random nonce to prevent re-using the same <code>k</code> and <code>n</code> for different messages.</p></li>
 </ul>
 <h1 id="handshake-patterns">8. Handshake patterns</h1>
-<p>A <strong>message pattern</strong> is some sequence of tokens from the set <code>(&quot;e&quot;, &quot;s&quot;, &quot;dhee&quot;, &quot;dhes&quot;, &quot;dhse&quot;, &quot;dhss&quot;)</code>. A <strong>handshake pattern</strong> consists of:</p>
+<p>A <strong>message pattern</strong> is some sequence of tokens from the set <code>(&quot;e&quot;, &quot;s&quot;, &quot;dhee&quot;, &quot;dhes&quot;, &quot;dhse&quot;, &quot;dhss&quot;)</code>.<br />
+A <strong>handshake pattern</strong> consists of:</p>
 <ul>
 <li>A pattern for the initiator's <strong>pre-message</strong> that is either:
 <ul>
@@ -544,7 +549,7 @@ Noise_IX       0              6</code></pre>
 <h2 id="more-patterns">8.6. More patterns</h2>
 <p>The patterns in the previous sections are useful examples which we are naming for convenience. Other valid patterns could be constructed, for example:</p>
 <ul>
-<li><p>It would be easy to modify <code>Noise_X</code> or <code>Noise_IK</code> to transmit the sender's static public key in cleartext instead of encrypted by changing <code>&quot;e, dhes,    s, dhss&quot;</code> to <code>&quot;e, s, dhes, dhss&quot;</code>. This would worsen identity hiding, so we're not bothering to name those patterns.</p></li>
+<li><p>It would be easy to modify <code>Noise_X</code> or <code>Noise_IK</code> to transmit the sender's static public key in cleartext instead of encrypted by changing <code>&quot;e, dhes, s, dhss&quot;</code> to <code>&quot;e, s, dhes, dhss&quot;</code>. This would worsen identity hiding, so we're not bothering to name those patterns.</p></li>
 <li><p>It would be easy to make <code>Noise_KK</code> or <code>Noise_IK</code> slightly more efficient by removing the <code>&quot;dhss&quot;</code>. This would worsen security properties for the initial exchange of handshake payloads, so we're not bothering to name those patterns.</p></li>
 <li><p>In some patterns both initiator and responder have a static key pair, but <code>&quot;dhss&quot;</code> is not performed. This DH operation could be added to provide more resilience in case the ephemerals are generated by a bad RNG.</p></li>
 <li><p>Pre-knowledge of ephemeral public keys is not demonstrated in any of the above patterns. This pre-knowledge could be used to implement a &quot;pre-key&quot; or &quot;semi-ephemeral key&quot; handshake, where the forward-secrecy and KCI-resistance of zero-RTT data is improved since the pre-distributed &quot;semi-ephemeral&quot; key can be changed more frequently than the responder's static key. These patterns might benefit from signatures, which are not yet included in Noise. These patterns also introduce new complexity around the lifetimes of semi-ephemeral key pairs, so are not discussed further here.</p></li>
@@ -686,7 +691,7 @@ Noise_XXfallback(s, rs, re):
 <p>Hash output lengths of 256 bits are supported because:</p>
 <ul>
 <li>SHA2-256 and BLAKE2s have sufficient collision-resistance at the 128-bit security level.</li>
-<li>SHA2-256 and BLAKE2s require less RAM, and less calculation when processing smaller inputs (due to smaller block size), then their larger brethren (SHA2-512 and BLAKE2b).</li>
+<li>SHA2-256 and BLAKE2s require less RAM, and less calculation when processing smaller inputs (due to smaller block size), than their larger brethren (SHA2-512 and BLAKE2b).</li>
 <li>SHA2-256 and BLAKE2s are faster on 32-bit processors than their larger brethren.</li>
 </ul>
 <p>Cipher keys are 256 bits because:</p>
