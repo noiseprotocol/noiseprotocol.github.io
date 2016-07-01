@@ -51,12 +51,11 @@ section .intro {
     margin: 0.5em 0 3em;
 }
 
-section .span6 .img {
-    float: left;
+.resources img {
+    float: right;
     height: 64;
     width: 80px;
-    margin-right: 20px;
-    margin-bottom: 40px;
+    margin-top: 2em;
 }
 
 section .span6 {
@@ -71,6 +70,10 @@ section .span6 p {
 
 section .step {
     float: left;
+}
+
+.container-fluid.max-width {
+    max-width: 1000px;
 }
 
 .circle {
@@ -121,6 +124,18 @@ section .step {
 
 .hero-unit .jump {
     padding-top: 100px;
+}
+
+
+@media (max-width: 500px) {
+    .hero-unit .jump {
+        padding-top: 10px;
+    }
+}
+
+
+.hero-unit h1 {
+    font-weight: bold; font-size: 4em;
 }
 
 

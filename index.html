@@ -7,7 +7,7 @@
     <meta name="author" content="Trevor Perrin">
 
     <!-- Le styles -->
-    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- <style type="text/css"> -->
     <!--   body { -->
     <!--     padding-top: 60px; -->
@@ -28,7 +28,7 @@
 
   <body class="home">
 
-      <main class="main" role="main">
+      <main class="main">
           <div class="container-fluid">
               <div class="hero-unit">
                   <div class="jump">
@@ -40,20 +40,30 @@
           </div>
       </main>
 
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-	<div class="container">
-	  <a class="brand" href="index.html">Noise</a>
-            <ul class="nav">
-              <li class="active"><a href="index.html">Home</a></li>
-              <li><a href="#resources">Resources</a></li>
-            </ul>	  
-	</div>
-      </div>
-    </div>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Noise</a>
+            </div>
 
-    <div class="container">
-      <section class="row features">
+            <div class="collapse navbar-collapse" id="navbar">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Home<span class="sr-only">(current)</span></a></li>
+                    <li><a href="#resources">Resources</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid max-width">
+      <section class="row">
+          <div class="col-xs-12">
 	<h2>
 	Crypto protocols that are simple, fast, and secure
 	</h2> <p class="intro"> Noise is a framework for building crypto
@@ -61,42 +71,57 @@
 	authentication, identity hiding, forward secrecy, zero round-trip encryption, and other
 	advanced features.
 	</p>
+          </div>
+      </section>
 
-      <hr id="resources"/>
+      <hr/>
+      <section id="resources" class="resources">
+          <div class="row">
 
-	<div class="span6">
-	  <div class="img"><img src="img/book.svg"/></div>
+	<div class="col-xs-12 col-sm-6 row">
+        <div class="col-xs-4"><img alt="book" src="img/book.svg"/></div>
+        <div class="col-xs-8">
 	  <h3>The specification</h3>
 	  <p>Detailed specification for the Noise Protocol Framework.</p>
-          <a class="btn" href="noise.html">Web</a>
-          <a class="btn" href="noise.pdf">PDF</a>
-          <a class="btn" href="https://github.com/noiseprotocol/noise_spec">Github</a>
+          <a class="btn btn-default" href="noise.html">Web</a>
+          <a class="btn btn-default" href="noise.pdf">PDF</a>
+          <a class="btn btn-default" href="https://github.com/noiseprotocol/noise_spec">Github</a>
+        </div>
 	</div>
 
-	<div class="span6">
-	  <div class="img"><img src="img/gears.svg"/></div>
+	<div class="col-xs-12 col-sm-6 row">
+	  <div class="col-xs-4"><img alt="gears" src="img/gears.svg"/></div>
+      <div class="col-xs-8">
 	  <h3>The code</h3>
 	  <p>Open source implementations of Noise.</p>
-          <a class="btn" href="https://github.com/rweather/noise-c">C</a>
-          <a class="btn" href="https://github.com/titanous/noise">Go</a>
-          <a class="btn" href="https://github.com/centromere/cacophony">Haskell</a>
-          <a class="btn" href="https://github.com/trevp/screech">Rust</a>
+          <a class="btn btn-default" href="https://github.com/rweather/noise-c">C</a>
+          <a class="btn btn-default" href="https://github.com/titanous/noise">Go</a>
+          <a class="btn btn-default" href="https://github.com/centromere/cacophony">Haskell</a>
+          <a class="btn btn-default" href="https://github.com/trevp/screech">Rust</a>
+      </div>
 	</div>
+          </div>
+          <div class="row">
 
-	<div class="span6">
-	  <div class="img"><img src="img/at.svg"/></div>
+	<div class="col-xs-12 col-sm-6 row">
+	  <div class="col-xs-4"><img alt="@" src="img/at.svg"/></div>
+      <div class="col-xs-8">
 	  <h3>The mailing list</h3>
 	  <p>A mailing list for discussing Noise.</p>
-          <a class="btn" href="https://moderncrypto.org/mailman/listinfo/noise">Join</a>
-          <a class="btn" href="https://moderncrypto.org/mail-archive/noise">Browse</a>
+          <a class="btn btn-default" href="https://moderncrypto.org/mailman/listinfo/noise">Join</a>
+          <a class="btn btn-default" href="https://moderncrypto.org/mail-archive/noise">Browse</a>
+      </div>
 	</div>
 	
-	<div class="span6">
-	  <div class="img"><img src="img/collaboration.svg"/></div>
+	<div class="col-xs-12 col-sm-6 row">
+	  <div class="col-xs-4"><img alt="collaboration" src="img/collaboration.svg"/></div>
+      <div class="col-xs-8">
 	  <h3>The wiki</h3>
 	  <p>More info, explanations, and resources.</p>
-          <p><a class="btn" href="https://github.com/noiseprotocol/noise_wiki/wiki">Visit</a></p>
+          <p><a class="btn btn-default" href="https://github.com/noiseprotocol/noise_wiki/wiki">Visit</a></p>
 	</div>
+    </div>
+    </div>
 
       </section>
 
@@ -108,7 +133,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 
     <script type="text/javascript">
       var clicky_site_ids = clicky_site_ids || [];
