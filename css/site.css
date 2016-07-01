@@ -92,9 +92,14 @@ section .step {
     margin-right: 30px;
 }
 
-.home {
-    background: url('../img/static.jpg') center 40px no-repeat white;
+.main {
+    background: url('../img/static.jpg') center 40px no-repeat black;
     padding-top: 55px;
+    margin: 0 0 2em 0;
+    background-color: black;
+    height: 415px;
+    color: white;
+    text-align: center;
 }
 
 .draft {
@@ -104,29 +109,18 @@ section .step {
 }
 
 .hero-unit {
-    width: 855px;
 /*    padding-left: 90px;*/
     background: url('../img/note.png') right center no-repeat;
     background-color: none;
 /*    padding: 60px 400px 0px 40px;*/
     /* margin-right: 130px; */
     /* margin-bottom: 90px; */
-    height: 304px;
-    margin: 0px auto;
+    margin: 0px;
 /*    min-width: 850px;*/
 }
 
 .hero-unit .jump {
-    /* background-color: rgba(38,38,38,0.4); */
-    -webkit-border-radius: 6px;
-    -moz-border-radius: 6px;
-    border-radius: 6px;
-    /* padding: 30px; */
-    padding-top: 150px;
-    padding-left: 30px;
-    width: 1000px;
-    margin-left: -55px;
-    /* box-shadow: -2px -2px 30px rgba(38,38,38,0.5); */
+    padding-top: 100px;
 }
 
 
