@@ -42,8 +42,26 @@ section p.intro {
     padding-top: 100px;
 }
 
+.hero-unit .jump .btn {
+    font-size: 1.5em;
+    box-shadow: 0 0 7px #fff;
+    font-weight: bold;
+}
+
+.hero-unit .jump img {
+    height: 1.2em;
+    margin-top: -0.2em;
+}
+
 .hero-unit h1 {
     font-weight: bold; font-size: 4em;
+    text-shadow: 0 0 10px #000;
+}
+
+@media (max-width: 730px) {
+    .hero-unit .jump {
+        padding-top: 70px;
+    }
 }
 
 @media (max-width: 500px) {
