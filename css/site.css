@@ -18,6 +18,10 @@ section p.intro {
     margin-top: 2em;
 }
 
+.resources .btn {
+    margin-bottom: 4px;
+}
+
 .container-fluid.max-width {
     max-width: 1000px;
 }
