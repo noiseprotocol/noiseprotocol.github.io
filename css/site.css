@@ -1,3 +1,51 @@
+/* bootstrap v2 button style for primary buttons*/
+.btn:hover {
+  text-decoration: none;
+  background-position: 0 -15px;
+  -webkit-transition: background-position 0.1s linear;
+  -moz-transition: background-position 0.1s linear;
+  -ms-transition: background-position 0.1s linear;
+  -o-transition: background-position 0.1s linear;
+  transition: background-position 0.1s linear;
+}
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary.active,
+.btn-primary.disabled,
+.btn-primary[disabled] {
+  background-color: #0055cc;
+  *background-color: #004ab3;
+}
+.btn-primary,
+.btn-primary:hover {
+  color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+.btn-primary:active,
+.btn-primary.active {
+  background-color: #004099 \9;
+}
+.btn-primary {
+  background-color: #0074cc;
+  background-image: -moz-linear-gradient(top, #0088cc, #0055cc);
+  background-image: -ms-linear-gradient(top, #0088cc, #0055cc);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0055cc));
+  background-image: -webkit-linear-gradient(top, #0088cc, #0055cc);
+  background-image: -o-linear-gradient(top, #0088cc, #0055cc);
+  background-image: linear-gradient(top, #0088cc, #0055cc);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0088cc', endColorstr='#0055cc', GradientType=0);
+  border-color: #0055cc #0055cc #003580;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  *background-color: #0055cc;
+  /* Darken IE7 buttons by default so they stand out more given they won't have borders */
+
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+}
+
+
+/* end bootstrap button style */;
+
 section h2 {
     text-align: center;
     font-size: 32px;
@@ -48,7 +96,6 @@ section p.intro {
 
 .hero-unit .jump .btn {
     font-size: 1.5em;
-    box-shadow: 0 0 7px #fff;
     font-weight: bold;
 }
 
@@ -58,8 +105,14 @@ section p.intro {
 }
 
 .hero-unit h1 {
-    font-weight: bold; font-size: 4em;
-    text-shadow: 0 0 10px #000;
+    font-weight: bold; font-size: 72px;
+    text-shadow: 0 0 20px #000;
+}
+
+@media (max-width: 940px) {
+    .hero-unit h1 {
+        font-size: 50px;
+    }
 }
 
 @media (max-width: 730px) {
